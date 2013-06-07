@@ -3,13 +3,9 @@ class Triple
 	attr_reader :x, :y, :z
 
 	def initialize(x,y,z)
-		@x = x
-		@y = y
-		@z = z
-
-		@rho = self.magnitude
-		@phi = Math.acos(@z / @rho)
-		@theta = Math.asin( @y / ( @rho*Math.sin(@phi) ) )
+		@x = x.to_f
+		@y = y.to_f
+		@z = z.to_f
 	end
 
 	def magnitude
