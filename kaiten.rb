@@ -1,4 +1,4 @@
-class Kunai
+class Kaiten
 
 	def initialize
 	end

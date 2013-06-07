@@ -1,4 +1,4 @@
-class Kunai
+class Grid
 
 	def initialize
 	end
