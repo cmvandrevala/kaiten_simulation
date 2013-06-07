@@ -1,6 +1,6 @@
 require_relative "../kunai.rb"
 
-describe "Kunai" do
+describe Kunai do
 	
 	before :each do
 		@kunai = Kunai.new
