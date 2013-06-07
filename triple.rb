@@ -13,7 +13,11 @@ class Triple
 	end
 
 	def r_hat
-		Triple.new(x/magnitude, y/magnitude, z/magnitude)
+		if self.magnitude == 0.0
+			return Triple.new(0.0, 0.0, 0.0)
+		else
+			Triple.new(x/magnitude, y/magnitude, z/magnitude)
+		end
 	end
 
 end

@@ -8,15 +8,39 @@ class Kaiten
 		@outward_chakra_speed = outward_chakra_speed.to_f
 	end
 
-	def total_chakra_speed(point)
-		return Triple.new(0.0, 0.0, 0.0) if point.magnitude > radius || point.magnitude == 0
-		x_speed = -point.y*chakra_angular_speed
-		y_speed = point.x*chakra_angular_speed
-		z_speed = 0.0
-		x_speed += @outward_chakra_speed*point.r_hat.x if point.x != 0
-		y_speed += @outward_chakra_speed*point.r_hat.y if point.y != 0
-		z_speed += @outward_chakra_speed*point.r_hat.z if point.z != 0
-		return Triple.new(x_speed, y_speed, z_speed)
+	def total_chakra_velocity(point)
+		if (point.magnitude > radius)
+			return Triple.new(0.0, 0.0, 0.0) 
+		else
+			return Triple.new( sum_phi_and_r_velocities(point).x, 
+							   sum_phi_and_r_velocities(point).y,
+							   sum_phi_and_r_velocities(point).z )
+		end
 	end
+
+
+	private
+
+		def chakra_phi_velocity(point)
+			x_velocity = -point.y*chakra_angular_speed
+			y_velocity = point.x*chakra_angular_speed
+			return Triple.new(x_velocity, y_velocity, 0.0)
+		end
+
+		def chakra_r_velocity(point)
+			x_velocity = @outward_chakra_speed*point.r_hat.x
+			y_velocity = @outward_chakra_speed*point.r_hat.y
+			z_velocity = @outward_chakra_speed*point.r_hat.z
+			return Triple.new(x_velocity, y_velocity, z_velocity)
+		end
+
+		def sum_phi_and_r_velocities(point)
+			x_velocity = chakra_phi_velocity(point).x + chakra_r_velocity(point).x
+			y_velocity = chakra_phi_velocity(point).y + chakra_r_velocity(point).y
+			z_velocity = chakra_phi_velocity(point).z + chakra_r_velocity(point).z
+			return Triple.new(x_velocity, y_velocity, z_velocity)
+		end
+
+
 
 end
