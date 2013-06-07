@@ -57,18 +57,32 @@ describe Kaiten do
 		@kaiten.total_chakra_speed(@mixed_center).magnitude.should eql 0.0
 	end
 
-	it "should calculate a total speed at the (x,0,0) edge of the kaiten" do
+	it "should calculate a total chakra speed at the (x,0,0) edge of the kaiten" do
 		x_edge = Triple.new(5,0,0)
 		@kaiten.total_chakra_speed(x_edge).x.should eql 1.0
 		@kaiten.total_chakra_speed(x_edge).y.should eql 5.0
 		@kaiten.total_chakra_speed(x_edge).z.should eql 0.0
 	end
 
-	it "should calculate a total speed at the (0,y,0) edge of the kaiten" do
+	it "should calculate a total chakra speed at the (0,y,0) edge of the kaiten" do
 		y_edge = Triple.new(0,5,0)
 		@kaiten.total_chakra_speed(y_edge).x.should eql -5.0
 		@kaiten.total_chakra_speed(y_edge).y.should eql 1.0
 		@kaiten.total_chakra_speed(y_edge).z.should eql 0.0
+	end
+
+	it "should calculate a total chakra speed at the (0,0,z) edge of the kaiten" do
+		z_edge = Triple.new(0,0,5)
+		@kaiten.total_chakra_speed(z_edge).x.should eql 0.0
+		@kaiten.total_chakra_speed(z_edge).y.should eql 0.0
+		@kaiten.total_chakra_speed(z_edge).z.should eql 1.0
+	end
+
+	it "should calculate a total chakra speed at the (sqrt(5),sqrt(5),0) edge of the kaiten" do
+		edge_point = Triple.new(5/Math.sqrt(2), 5/Math.sqrt(2), 0)
+		@kaiten.total_chakra_speed(edge_point).x.should eql -4/Math.sqrt(2)
+		@kaiten.total_chakra_speed(edge_point).y.should eql 6/Math.sqrt(2)
+		@kaiten.total_chakra_speed(edge_point).z.should eql 0.0
 	end
 
 end

@@ -26,4 +26,10 @@ describe Triple do
 		@triple.magnitude.should eql Math.sqrt(14)
 	end
 
+	it "should be able to calculate the r-hat unit vector of the Triple" do
+		@triple.r_hat.x.should eql ( 1 / Math.sqrt(14) )
+		@triple.r_hat.y.should eql ( 2 / Math.sqrt(14) )
+		@triple.r_hat.z.should eql ( -3 / Math.sqrt(14) )
+	end
+
 end
