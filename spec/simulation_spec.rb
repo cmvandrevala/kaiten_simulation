@@ -1,6 +1,6 @@
 require_relative '../simulation.rb'
 #require_relative '../kaiten.rb'
-#require_relative '../triple.rb'
+require_relative '../triple.rb'
 
 describe Simulation do
 	
@@ -26,14 +26,36 @@ describe Simulation do
 
 	it "should be able to calculate the velocity at the next time step for no acceleration" do
 		@simulation.kunai.velocity.x.should eql -25.0
-		@simulation.evolve_velocity(Triple.new(0,0,0))
+		@simulation.evolve_velocity(Triple.new(0, 0, 0))
 		@simulation.kunai.velocity.x.should eql -25.0
 	end
 
-	xit "should be able to calculate the velocity at the next time step for x-acceleration" do
+	it "should be able to calculate the velocity at the next time step for x-acceleration" do
 		@simulation.kunai.velocity.x.should eql -25.0
-		@simulation.evolve_velocity(Triple.new(1000,0,0))
+		@simulation.evolve_velocity(Triple.new(1000, 0, 0))
 		@simulation.kunai.velocity.x.should eql -24.0
+	end
+
+	it "should be able to calculate the velocity at the next time step for y-acceleration" do
+		@simulation.kunai.velocity.y.should eql 0.0
+		@simulation.evolve_velocity(Triple.new(0, 1000, 0))
+		@simulation.kunai.velocity.y.should eql 1.0
+	end
+
+	it "should be able to calculate the velocity at the next time step for z-acceleration" do
+		@simulation.kunai.velocity.z.should eql 0.0
+		@simulation.evolve_velocity(Triple.new(0, 0, 1000))
+		@simulation.kunai.velocity.z.should eql 1.0
+	end
+
+	it "should be able to calculate the velocity at the next time step for a general acceleration" do
+		@simulation.kunai.velocity.x.should eql -25.0
+		@simulation.kunai.velocity.y.should eql 0.0
+		@simulation.kunai.velocity.z.should eql 0.0
+		@simulation.evolve_velocity(Triple.new(1000, 1000, 1000))
+		@simulation.kunai.velocity.x.should eql -24.0
+		@simulation.kunai.velocity.y.should eql 1.0
+		@simulation.kunai.velocity.z.should eql 1.0
 	end
 
 end

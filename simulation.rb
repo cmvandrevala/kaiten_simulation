@@ -9,7 +9,10 @@ class Simulation
 	end
 
 	def evolve_velocity(acceleration)
-
+		@kunai.velocity.x += acceleration.x*@time_step
+		@kunai.velocity.y += acceleration.y*@time_step
+		@kunai.velocity.z += acceleration.z*@time_step
+		return Triple.new(@kunai.velocity.x, @kunai.velocity.y, @kunai.velocity.z)
 	end
 
 end

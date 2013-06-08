@@ -1,6 +1,6 @@
 class Triple
 
-	attr_reader :x, :y, :z
+	attr_accessor :x, :y, :z
 
 	def initialize(x,y,z)
 		@x = x.to_f
