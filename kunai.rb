@@ -1,6 +1,7 @@
 class Kunai
 
-	attr_reader :area, :mass, :position, :velocity 
+	attr_reader :area, :mass
+	attr_accessor :position, :velocity 
 
 	def initialize
 		@area = 0.01

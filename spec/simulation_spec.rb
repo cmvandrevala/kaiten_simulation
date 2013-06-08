@@ -1,6 +1,4 @@
 require_relative '../simulation.rb'
-#require_relative '../kaiten.rb'
-require_relative '../triple.rb'
 
 describe Simulation do
 	
@@ -92,5 +90,14 @@ describe Simulation do
 		@simulation.kunai.position.z.should eql 0.0005
 	end
 
+	it "should calculate zero force when the kunai is far from the kaiten" do
+		@simulation.calculate_force(Triple.new(12, 0, 0)).magnitude.should eql 0.0
+	end
+
+	it "should calculate non-zero force when the kunai is close to the kaiten" do
+		@simulation.calculate_force(Triple.new(9, 0, 0)).magnitude.should_not eql 0.0
+	end
+
+	#create a method called calculate_acceleration where F = ma
 
 end

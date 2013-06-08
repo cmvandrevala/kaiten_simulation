@@ -9,15 +9,20 @@ class Simulation
 	end
 
 	def evolve_velocity(acceleration)
-		@kunai.velocity.x += acceleration.x*@time_step
-		@kunai.velocity.y += acceleration.y*@time_step
-		@kunai.velocity.z += acceleration.z*@time_step
+		@kunai.velocity = @kunai.velocity.add_to(acceleration.times_constant(@time_step))
 	end
 
 	def evolve_position(acceleration)
-		@kunai.position.x += (@kunai.velocity.x*@time_step + 0.5*acceleration.x*@time_step*@time_step)
-		@kunai.position.y += (@kunai.velocity.y*@time_step + 0.5*acceleration.y*@time_step*@time_step)
-		@kunai.position.z += (@kunai.velocity.z*@time_step + 0.5*acceleration.z*@time_step*@time_step)
+		@kunai.position = @kunai.position.add_to(@kunai.velocity.times_constant(@time_step))
+		@kunai.position = @kunai.position.add_to(acceleration.times_constant(0.5*@time_step**2))
+	end
+
+	def calculate_force(point)
+		if point.magnitude > @kaiten.radius
+			return Triple.new(0, 0, 0)
+		else
+			return Triple.new(1, 0, 0) #Will be filled in with proper value later
+		end
 	end
 
 end
