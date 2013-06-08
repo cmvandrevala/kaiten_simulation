@@ -2,25 +2,37 @@ require_relative '../simulation.rb'
 
 describe Simulation do
 	
-	before :each do
+	before(:each) do
 		@simulation = Simulation.new
+		@zero_vector = Triple.new(0, 0, 0)
 	end
 
-	it "should be an instance of the class Simulation" do
-		@simulation.should be_an_instance_of Simulation
+	context "when a simulation is created" do
+		it { should be_an_instance_of Simulation }
+		specify { @simulation.time_step.should eql 0.001 }
+		specify { @simulation.kaiten.should be_an_instance_of Kaiten }
+		specify { @simulation.kunai.should be_an_instance_of Kunai }
 	end
 
-	it "should have a default time step of 1.0 ms" do
-		@simulation.time_step.should eql 0.001
+	context "when calculating the drag force on the kunai" do
+		specify { @simulation.calculate_drag_coefficient.should eql 0.47 }
+		specify { @simulation.calculate_force_coefficient.should eql 0.00287875 }
+		specify { @simulation.calculate_force(Triple.new(9, 0, 0)).magnitude.should_not eql 0.0 }
+		specify { @simulation.calculate_force(@zero_vector).is_equal_to?(@zero_vector).should eql true }
+		specify { @simulation.calculate_force(Triple.new(12,0,0)).is_equal_to?(@zero_vector).should eql true }
 	end
 
-	it "should contain a kaiten object" do
-		@simulation.kaiten.should be_an_instance_of Kaiten
+	context "when calculating the velocity in the next time step" do
+		before(:each) do
+			@acceleration = Triple.new(1000, 1000, 1000)
+			@answer = Triple.new(-24.0, 1.0, 1.0)
+			@simulation.evolve_velocity(@acceleration)
+		end
+		specify { @simulation.kunai.velocity.should be_an_instance_of Triple }
+		specify { @simulation.kunai.velocity.is_equal_to?(@answer).should eql true }
 	end
 
-	it "should contain a kunai object" do
-		@simulation.kunai.should be_an_instance_of Kunai
-	end
+
 
 	it "should be able to calculate the velocity at the next time step for no acceleration" do
 		@simulation.kunai.velocity.x.should eql -25.0
@@ -90,21 +102,11 @@ describe Simulation do
 		@simulation.kunai.position.z.should eql 0.0005
 	end
 
-	xit "should calculate the drag coefficient of the kunai" do
-		@simulation.calculate_drag_coefficient.should eql 0.47
-	end
 
-	xit "should calculate zero force when the kunai is far from the kaiten" do
-		@simulation.calculate_force(Triple.new(12, 0, 0)).magnitude.should eql 0.0
-	end
 
-	xit "should calculate non-zero force when the kunai is close to the kaiten" do
-		@simulation.calculate_force(Triple.new(9, 0, 0)).magnitude.should_not eql 0.0
-	end
 
-	xit "should return the coefficient (0.5)(Density)(Drag Coefficient)(Area)" do
-		@simulation.calculate_force_coefficient.should eql 0.00287875
-	end
+
+
 
 	#create a method called calculate_acceleration where F = ma
 

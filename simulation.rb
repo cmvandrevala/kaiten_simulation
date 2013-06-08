@@ -18,7 +18,7 @@ class Simulation
 	end
 
 	def calculate_force(position)
-		if point.magnitude > @kaiten.radius
+		if position.magnitude > @kaiten.radius || position.magnitude == 0.0
 			return Triple.new(0, 0, 0)
 		else
 			return Triple.new(1, 0, 0) #Will be filled in with proper value later

@@ -8,82 +8,77 @@ describe Triple do
 		@negative_triple = Triple.new(-0.1, -0.9, -10)
 	end
 
-	it "should be an instance of the class Triple" do
-		@triple.should be_an_instance_of Triple
-		@zero_triple.should be_an_instance_of Triple
-		@negative_triple.should be_an_instance_of Triple
+	context "it should be an instance of the class Triple when initialized" do
+		specify { @triple.should be_an_instance_of Triple }
+		specify { @zero_triple.should be_an_instance_of Triple }
+		specify { @negative_triple.should be_an_instance_of Triple }
 	end
 
-	it "should return an x-coordinate" do
-		@triple.x.should eql 1.0
-		@zero_triple.x.should eql 0.0
-		@negative_triple.x.should eql -0.1
+	context "it should have coordinates (x,y,z)" do
+		specify { @triple.x.should eql 1.0 }
+		specify { @triple.y.should eql 2.0 }
+		specify { @triple.z.should eql -3.0 }
+
+		specify { @zero_triple.x.should eql 0.0 }
+		specify { @zero_triple.y.should eql 0.0 }
+		specify { @zero_triple.z.should eql 0.0 }
+
+		specify { @negative_triple.x.should eql -0.1 }
+		specify { @negative_triple.y.should eql -0.9 }
+		specify { @negative_triple.z.should eql -10.0}
 	end
 
-	it "should have a floating point x-coordinate" do
-		@triple.x.should be_an_instance_of Float
-		@zero_triple.x.should be_an_instance_of Float
-		@negative_triple.x.should be_an_instance_of Float
+	context "the coordinates should be floating point values" do
+		specify { @triple.x.should be_an_instance_of Float }
+		specify { @triple.y.should be_an_instance_of Float }
+		specify { @triple.z.should be_an_instance_of Float }
+
+		specify { @zero_triple.x.should be_an_instance_of Float }
+		specify { @zero_triple.y.should be_an_instance_of Float }
+		specify { @zero_triple.z.should be_an_instance_of Float }
+
+		specify { @negative_triple.x.should be_an_instance_of Float }
+		specify { @negative_triple.y.should be_an_instance_of Float }
+		specify { @negative_triple.z.should be_an_instance_of Float }
 	end
 
-	it "should return a y-coordinate" do
-		@triple.y.should eql 2.0
-		@zero_triple.y.should eql 0.0
-		@negative_triple.y.should eql -0.9
+	context "the magnitude function should return the magnitude of the triple" do
+		specify { @triple.magnitude.should eql Math.sqrt(14) }
+		specify { @zero_triple.magnitude.should eql 0.0 }
+		specify { @negative_triple.magnitude.should eql Math.sqrt(100.82) }
 	end
 
-	it "should have a floating point y-coordinate" do
-		@triple.y.should be_an_instance_of Float
-		@zero_triple.x.should be_an_instance_of Float
-		@negative_triple.y.should be_an_instance_of Float
+	context "the magnitude function should return floating point values" do
+		specify { @triple.magnitude.should be_an_instance_of Float }
+		specify { @zero_triple.magnitude.should be_an_instance_of Float }
+		specify { @negative_triple.magnitude.should be_an_instance_of Float }
 	end
 
-	it "should return a z-coordinate" do
-		@triple.z.should eql -3.0
-		@zero_triple.z.should eql 0.0
-		@negative_triple.z.should eql -10.0
+	context "the r_hat function should calculate the r-hat components of the triple" do
+		specify { @triple.r_hat.x.should eql ( 1.0 / Math.sqrt(14) ) }
+		specify { @triple.r_hat.y.should eql ( 2.0 / Math.sqrt(14) ) }
+		specify { @triple.r_hat.z.should eql ( -3.0 / Math.sqrt(14) ) }
+
+		specify { @zero_triple.r_hat.x.should eql 0.0 }
+		specify { @zero_triple.r_hat.y.should eql 0.0 }
+		specify { @zero_triple.r_hat.z.should eql 0.0 }
+
+		specify { @negative_triple.r_hat.x.should eql ( -0.1 / Math.sqrt(100.82) ) }
+		specify { @negative_triple.r_hat.y.should eql ( -0.9 / Math.sqrt(100.82) ) }
+		specify { @negative_triple.r_hat.z.should eql ( -10.0 / Math.sqrt(100.82) ) }
 	end
 
-	it "should have a floating point z-coordinate" do
-		@triple.z.should be_an_instance_of Float
-		@negative_triple.z.should be_an_instance_of Float
-		@zero_triple.z.should be_an_instance_of Float
+	context "the r_hat vector for a non-zero vector should have a magnitude of one" do
+		specify { @triple.r_hat.magnitude.should eql 1.0 }
+		specify { @negative_triple.r_hat.magnitude.should eql 1.0 }
 	end
 
-	it "should return the float 0.0 for the magnitude of the zero_triple" do
-		@zero_triple.magnitude.should eql 0.0
-		@zero_triple.magnitude.should be_an_instance_of Float
-	end
-
-	it "should return the magnitude of the Triple as a float" do
-		@triple.magnitude.should eql Math.sqrt(14)
-		@negative_triple.magnitude.should eql Math.sqrt(100.82)
-		@triple.magnitude.should be_an_instance_of Float
-		@negative_triple.magnitude.should be_an_instance_of Float
-	end
-
-	it "should be able to calculate the r-hat unit vector of the Triple" do
-		@triple.r_hat.x.should eql ( 1.0 / Math.sqrt(14) )
-		@triple.r_hat.y.should eql ( 2.0 / Math.sqrt(14) )
-		@triple.r_hat.z.should eql ( -3.0 / Math.sqrt(14) )
-
-		@zero_triple.r_hat.x.should eql 0.0
-		@zero_triple.r_hat.y.should eql 0.0
-		@zero_triple.r_hat.z.should eql 0.0
-
-		@negative_triple.r_hat.x.should eql ( -0.1 / Math.sqrt(100.82) )
-		@negative_triple.r_hat.y.should eql ( -0.9 / Math.sqrt(100.82) )
-		@negative_triple.r_hat.z.should eql ( -10.0 / Math.sqrt(100.82) )
-	end
-
-	it "should return an r-hat unit vector with unit magnitude (except for zero_triple case)" do
-		@triple.r_hat.magnitude.should eql 1.0
-		@zero_triple.r_hat.magnitude.should eql 0.0
-		@negative_triple.r_hat.magnitude.should eql 1.0
+	context "the r_hat vector for the zero vector should have a magnitude of zero" do
+		specify { @zero_triple.r_hat.magnitude.should eql 0.0 }
 	end
 
 	it "should be able to sum a zero and non-zero triple as if they were vectors" do
-		@triple.add_to(@zero_triple).x.should eql 1.0
+		specify { @triple.add_to(@zero_triple).x.should eql 1.0}
 		@zero_triple.add_to(@triple).y.should eql 2.0
 		@triple.add_to(@zero_triple).z.should eql -3.0
 	end
