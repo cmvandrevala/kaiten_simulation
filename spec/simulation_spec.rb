@@ -90,12 +90,20 @@ describe Simulation do
 		@simulation.kunai.position.z.should eql 0.0005
 	end
 
-	it "should calculate zero force when the kunai is far from the kaiten" do
+	xit "should calculate the drag coefficient of the kunai" do
+		@simulation.calculate_drag_coefficient.should eql 0.47
+	end
+
+	xit "should calculate zero force when the kunai is far from the kaiten" do
 		@simulation.calculate_force(Triple.new(12, 0, 0)).magnitude.should eql 0.0
 	end
 
-	it "should calculate non-zero force when the kunai is close to the kaiten" do
+	xit "should calculate non-zero force when the kunai is close to the kaiten" do
 		@simulation.calculate_force(Triple.new(9, 0, 0)).magnitude.should_not eql 0.0
+	end
+
+	xit "should return the coefficient (0.5)(Density)(Drag Coefficient)(Area)" do
+		@simulation.calculate_force_coefficient.should eql 0.00287875
 	end
 
 	#create a method called calculate_acceleration where F = ma

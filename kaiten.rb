@@ -5,7 +5,7 @@ class Kaiten
 
 	def initialize(radius, chakra_angular_speed = 1.0, outward_chakra_speed = 1.0)
 		@radius = radius.to_f
-		@air_density = 101325
+		@air_density = 1.225
 		@chakra_angular_speed = chakra_angular_speed.to_f
 		@outward_chakra_speed = outward_chakra_speed.to_f
 	end

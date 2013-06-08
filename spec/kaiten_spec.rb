@@ -24,8 +24,8 @@ describe Kaiten do
 		@kaiten.chakra_angular_speed.should eql 1.0
 	end
 
-	it "should have a default air density of 101325 Pa" do
-		@kaiten.air_density.should eql 101325
+	it "should have a default air density of 1.225 kg/m^3" do
+		@kaiten.air_density.should eql 1.225
 	end
 
 	it "should have an adjustable, floating point chakra angular speed upon initialization" do
