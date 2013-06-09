@@ -1,96 +1,56 @@
 require_relative "../kaiten.rb"
-require_relative "../triple.rb"
 
 describe Kaiten do
 
-	before :each do
+	before :all do
 		@kaiten = Kaiten.new(5)
+		@another_kaiten = Kaiten.new(5, 12, 13)
 		@center = Triple.new(0, 0, 0)
 		@x_edge = Triple.new(5, 0, 0)
+		@x_answer = Triple.new(1, 5, 0)
 		@y_edge = Triple.new(0, 5, 0)
+		@y_answer = Triple.new(-5, 1, 0)
 		@z_edge = Triple.new(0, 0, 5)
+		@z_answer = Triple.new(0, 0, 1)
+		@barely_outside = Triple.new(5.00001, 0.0, 0.0)
+		@far_away_one_direction = Triple.new(0, 1000, 0)
+		@far_away_xyz = Triple.new(100, 236, 129)
+		@edge_point = Triple.new(5/Math.sqrt(2), 5/Math.sqrt(2), 0)
+		@edge_answer = Triple.new(-4/Math.sqrt(2), 6/Math.sqrt(2), 0)
+		@second_edge_point = Triple.new( 1, 1, Math.sqrt(23) )
+		@second_edge_answer = Triple.new(-0.8, 1.2, Math.sqrt(23)/5)
 	end
 
-	it "should be an instance of the class kaiten" do
-		@kaiten.should be_an_instance_of Kaiten
+	context "it should initialize a default instance of the class Kaiten" do
+		specify { @kaiten.should be_an_instance_of Kaiten }
+		specify { @kaiten.radius.should eql 5.0 }
+		specify { @kaiten.radius.should be_an_instance_of Float }
+		specify { @kaiten.chakra_angular_speed.should eql 1.0 }
+		specify { @kaiten.chakra_angular_speed.should be_an_instance_of Float }
+		specify { @kaiten.air_density.should eql 1.225 }
+		specify { @kaiten.air_density.should be_an_instance_of Float }
+		specify { @kaiten.outward_chakra_speed.should eql 1.0 }
+		specify { @kaiten.outward_chakra_speed.should be_an_instance_of Float }
 	end
 
-	it "should have a floating point radius" do
-		@kaiten.radius.should eql 5.0
-		@kaiten.radius.should be_an_instance_of Float
+	context "it should initialize an instance of the class Kaiten with parameters" do
+		specify { @another_kaiten.chakra_angular_speed.should eql 12.0 }
+		specify { @another_kaiten.chakra_angular_speed.should be_an_instance_of Float }
+		specify { @another_kaiten.outward_chakra_speed.should eql 13.0 }
+		specify { @another_kaiten.outward_chakra_speed.should be_an_instance_of Float }
 	end
 
-	it "should have a default chakra angular speed of 1.0 rad/s" do
-		@kaiten.chakra_angular_speed.should eql 1.0
-	end
-
-	it "should have a default air density of 1.225 kg/m^3" do
-		@kaiten.air_density.should eql 1.225
-	end
-
-	it "should have an adjustable, floating point chakra angular speed upon initialization" do
-		@new_kaiten = Kaiten.new(5,12,1.0)
-		@new_kaiten.chakra_angular_speed.should eql 12.0
-		@new_kaiten.chakra_angular_speed.should be_an_instance_of Float
-	end
-
-	it "should have a default outward chakra speed of 1.0 m/s" do
-		@kaiten.outward_chakra_speed.should eql 1.0
-	end
-
-	it "should have an adjustable, floating point outward chakra speed upon initialization" do
-		@new_kaiten = Kaiten.new(5,1,12)
-		@new_kaiten.outward_chakra_speed.should eql 12.0
-		@new_kaiten.outward_chakra_speed.should be_an_instance_of Float
-	end
-
-	it "should return a triple for the total_chakra_velocity" do
-		@kaiten.total_chakra_velocity(@center).should be_an_instance_of Triple
-	end
-
-	it "should calculate zero total chakra speed far away from the kaiten" do
-		barely_outside = Triple.new(5.00001, 0.0, 0.0)
-		far_away_one_direction = Triple.new(0, 1000, 0)
-		far_away_xyz = Triple.new(100, 236, 129)
-		@kaiten.total_chakra_velocity(barely_outside).magnitude.should eql 0.0
-		@kaiten.total_chakra_velocity(far_away_one_direction).magnitude.should eql 0.0
-		@kaiten.total_chakra_velocity(far_away_xyz).magnitude.should eql 0.0
-	end
-
-	it "should calculate zero total chakra speed at the center of the kaiten" do
-		@kaiten.total_chakra_velocity(@center).magnitude.should eql 0.0
-	end
-
-	it "should calculate a total chakra speed at the (x,0,0) edge of the kaiten" do
-		@kaiten.total_chakra_velocity(@x_edge).x.should eql 1.0
-		@kaiten.total_chakra_velocity(@x_edge).y.should eql 5.0
-		@kaiten.total_chakra_velocity(@x_edge).z.should eql 0.0
-	end
-
-	it "should calculate a total chakra speed at the (0,y,0) edge of the kaiten" do
-		@kaiten.total_chakra_velocity(@y_edge).x.should eql -5.0
-		@kaiten.total_chakra_velocity(@y_edge).y.should eql 1.0
-		@kaiten.total_chakra_velocity(@y_edge).z.should eql 0.0
-	end
-
-	it "should calculate a total chakra speed at the (0,0,z) edge of the kaiten" do
-		@kaiten.total_chakra_velocity(@z_edge).x.should eql 0.0
-		@kaiten.total_chakra_velocity(@z_edge).y.should eql 0.0
-		@kaiten.total_chakra_velocity(@z_edge).z.should eql 1.0
-	end
-
-	it "should calculate a total chakra speed at the (5/sqrt(2),5/sqrt(2),0) edge of the kaiten" do
-		edge_point = Triple.new(5/Math.sqrt(2), 5/Math.sqrt(2), 0)
-		@kaiten.total_chakra_velocity(edge_point).x.should eql -4/Math.sqrt(2)
-		@kaiten.total_chakra_velocity(edge_point).y.should eql 6/Math.sqrt(2)
-		@kaiten.total_chakra_velocity(edge_point).z.should eql 0.0
-	end
-
-	it "should calculate a total chakra speed at the (1,1,sqrt(23)) edge of the kaiten" do
-		edge_point = Triple.new( 1, 1, Math.sqrt(23) )
-		@kaiten.total_chakra_velocity(edge_point).x.should eql -1.0 + 0.2
-		@kaiten.total_chakra_velocity(edge_point).y.should eql 1.0 + 0.2
-		@kaiten.total_chakra_velocity(edge_point).z.should eql 0.0 + Math.sqrt(23) / 5
+	context "the method total_chakra_velocity should return the total chakra velocity at a point" do
+		specify { @kaiten.total_chakra_velocity(@center).should be_an_instance_of Triple }
+		specify { @kaiten.total_chakra_velocity(@center).magnitude.should eql 0.0 }
+		specify { @kaiten.total_chakra_velocity(@x_edge).is_equal_to?(@x_answer).should eql true }
+		specify { @kaiten.total_chakra_velocity(@y_edge).is_equal_to?(@y_answer).should eql true }
+		specify { @kaiten.total_chakra_velocity(@z_edge).is_equal_to?(@z_answer).should eql true }
+		specify { @kaiten.total_chakra_velocity(@barely_outside).magnitude.should eql 0.0 }
+		specify { @kaiten.total_chakra_velocity(@far_away_one_direction).magnitude.should eql 0.0 }
+		specify { @kaiten.total_chakra_velocity(@far_away_xyz).magnitude.should eql 0.0 }
+		specify { @kaiten.total_chakra_velocity(@edge_point).is_equal_to?(@edge_answer).should be true }
+		specify { @kaiten.total_chakra_velocity(@second_edge_point).is_equal_to?(@second_edge_answer).should be true }
 	end
 
 end
