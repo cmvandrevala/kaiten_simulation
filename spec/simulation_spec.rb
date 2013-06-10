@@ -27,6 +27,9 @@ describe Simulation do
 		@x_force = Triple.new(1, 0, 0)
 		@y_force = Triple.new(0, 2, 0)
 		@z_force = Triple.new(0, 0, 3.1)
+
+		@within_kaiten = Triple.new(9, 0, 0)
+		@outside_kaiten = Triple.new(10.1, 0, 0)
 	end
 
 	context "when a simulation is created" do
@@ -36,13 +39,12 @@ describe Simulation do
 		specify { @simulation.kunai.should be_an_instance_of Kunai }
 	end
 
-#Add more stuff here
 	context "when calculating the drag force on the kunai" do
 		specify { @simulation.calculate_drag_coefficient.should eql 0.47 }
 		specify { @simulation.calculate_force_coefficient.should eql 0.00287875 }
-		specify { @simulation.calculate_force(Triple.new(9, 0, 0)).magnitude.should_not eql 0.0 }
+		specify { @simulation.calculate_force(@within_kaiten).is_equal_to?(Triple.new(1, 81, 0).times_constant(@simulation.calculate_force_coefficient)).should eql true }
 		specify { @simulation.calculate_force(@zero_vector).is_equal_to?(@zero_vector).should eql true }
-		specify { @simulation.calculate_force(Triple.new(12,0,0)).is_equal_to?(@zero_vector).should eql true }
+		specify { @simulation.calculate_force(@outside_kaiten).is_equal_to?(@zero_vector).should eql true }
 	end
 
 	context "when calculating the velocity in the next time step using @zero_vector" do

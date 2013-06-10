@@ -12,6 +12,10 @@ class Triple
 		Math.sqrt(@x**2 + @y**2 + @z**2)
 	end
 
+	def square
+		return Triple.new(@x**2, @y**2, @z**2)
+	end
+
 	def r_hat
 		if self.magnitude == 0.0
 			return Triple.new(0.0, 0.0, 0.0)

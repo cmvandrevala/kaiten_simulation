@@ -119,4 +119,9 @@ describe Triple do
 		specify { @negative_triple.is_equal_to?(Triple.new(1,2,3)).should eql false }
 	end
 
+	context "the method square should square each element of a triple" do
+		specify {@triple.square.is_equal_to?(Triple.new(1, 4, 9)).should eql true }
+		specify {@zero_triple.square.is_equal_to?(@zero_triple).should eql true }
+	end
+
 end

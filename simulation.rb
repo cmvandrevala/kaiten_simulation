@@ -25,7 +25,7 @@ class Simulation
 		if position.magnitude > @kaiten.radius || position.magnitude == 0.0
 			return Triple.new(0, 0, 0)
 		else
-			return Triple.new(1, 0, 0) #Will be filled in with proper value later
+			return @kaiten.total_chakra_velocity(position).square.times_constant(self.calculate_force_coefficient)
 		end
 	end
 
