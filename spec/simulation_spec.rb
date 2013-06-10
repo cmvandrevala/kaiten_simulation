@@ -23,6 +23,10 @@ describe Simulation do
 
 		@zero_vector = Triple.new(0, 0, 0)
 		@zero_time_stepped_position = Triple.new(19.975, 0, 0)
+
+		@x_force = Triple.new(1, 0, 0)
+		@y_force = Triple.new(0, 2, 0)
+		@z_force = Triple.new(0, 0, 3.1)
 	end
 
 	context "when a simulation is created" do
@@ -32,6 +36,7 @@ describe Simulation do
 		specify { @simulation.kunai.should be_an_instance_of Kunai }
 	end
 
+#Add more stuff here
 	context "when calculating the drag force on the kunai" do
 		specify { @simulation.calculate_drag_coefficient.should eql 0.47 }
 		specify { @simulation.calculate_force_coefficient.should eql 0.00287875 }
@@ -95,6 +100,12 @@ describe Simulation do
 		specify { @simulation.kunai.position.is_equal_to?(@z_time_stepped_position).should eql true }
 	end
 
-	#create a method called calculate_acceleration where F = ma
+	context "when calculating the acceleration given a force" do
+		specify { @simulation.calculate_acceleration(@acceleration).should be_an_instance_of Triple }
+		specify { @simulation.calculate_acceleration(@zero_vector).magnitude.should eql 0.0 }
+		specify { @simulation.calculate_acceleration(@x_force).magnitude.should eql 1.0}
+		specify { @simulation.calculate_acceleration(@y_force).magnitude.should eql 2.0}
+		specify { @simulation.calculate_acceleration(@z_force).magnitude.should eql 3.1}
+	end
 
 end
