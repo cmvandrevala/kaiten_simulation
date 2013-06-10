@@ -40,11 +40,11 @@ describe Simulation do
 	end
 
 	context "when calculating the drag force on the kunai" do
-		specify { @simulation.calculate_drag_coefficient.should eql 0.47 }
-		specify { @simulation.calculate_force_coefficient.should eql 0.00287875 }
-		specify { @simulation.calculate_force(@within_kaiten).is_equal_to?(Triple.new(1, 81, 0).times_constant(@simulation.calculate_force_coefficient)).should eql true }
-		specify { @simulation.calculate_force(@zero_vector).is_equal_to?(@zero_vector).should eql true }
-		specify { @simulation.calculate_force(@outside_kaiten).is_equal_to?(@zero_vector).should eql true }
+		specify { @simulation.drag_coefficient.should eql 0.47 }
+		specify { @simulation.force_coefficient.should eql 0.00287875 }
+		specify { @simulation.force(@within_kaiten).is_equal_to?(Triple.new(1, 81, 0).times_constant(@simulation.force_coefficient)).should eql true }
+		specify { @simulation.force(@zero_vector).is_equal_to?(@zero_vector).should eql true }
+		specify { @simulation.force(@outside_kaiten).is_equal_to?(@zero_vector).should eql true }
 	end
 
 	context "when calculating the velocity in the next time step using @zero_vector" do
@@ -103,11 +103,11 @@ describe Simulation do
 	end
 
 	context "when calculating the acceleration given a force" do
-		specify { @simulation.calculate_acceleration(@acceleration).should be_an_instance_of Triple }
-		specify { @simulation.calculate_acceleration(@zero_vector).magnitude.should eql 0.0 }
-		specify { @simulation.calculate_acceleration(@x_force).magnitude.should eql 1.0}
-		specify { @simulation.calculate_acceleration(@y_force).magnitude.should eql 2.0}
-		specify { @simulation.calculate_acceleration(@z_force).magnitude.should eql 3.1}
+		specify { @simulation.acceleration(@acceleration).should be_an_instance_of Triple }
+		specify { @simulation.acceleration(@zero_vector).magnitude.should eql 0.0 }
+		specify { @simulation.acceleration(@x_force).magnitude.should eql 1.0}
+		specify { @simulation.acceleration(@y_force).magnitude.should eql 2.0}
+		specify { @simulation.acceleration(@z_force).magnitude.should eql 3.1}
 	end
 
 end

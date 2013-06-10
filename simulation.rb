@@ -17,23 +17,23 @@ class Simulation
 		@kunai.position = @kunai.position.add_to(acceleration.times_constant(0.5*@time_step**2))
 	end
 
-	def calculate_acceleration(force)
+	def acceleration(force)
 		return force.times_constant(1/@kunai.mass)
 	end
 
-	def calculate_force(position)
+	def force(position)
 		if position.magnitude > @kaiten.radius || position.magnitude == 0.0
 			return Triple.new(0, 0, 0)
 		else
-			return @kaiten.total_chakra_velocity(position).square.times_constant(self.calculate_force_coefficient)
+			return @kaiten.total_chakra_velocity(position).square.times_constant(self.force_coefficient)
 		end
 	end
 
-	def calculate_force_coefficient
-		0.5*@kaiten.air_density*@kunai.area*self.calculate_drag_coefficient
+	def force_coefficient
+		0.5*@kaiten.air_density*@kunai.area*self.drag_coefficient
 	end
 
-	def calculate_drag_coefficient
+	def drag_coefficient
 		0.47 #Sphere
 	end
 
