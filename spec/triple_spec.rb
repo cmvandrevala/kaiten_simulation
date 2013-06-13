@@ -78,17 +78,17 @@ describe Triple do
 	end
 
 	context "the add_to method should sum a pair of triples" do
-		specify { @triple.add_to(@zero_triple).is_equal_to?(@triple).should eql true }
-		specify { @negative_triple.add_to(@zero_triple).is_equal_to?(@negative_triple).should eql true }
-		specify { @zero_triple.add_to(@zero_triple).is_equal_to?(@zero_triple).should eql true }
+		specify { (@triple+@zero_triple).is_equal_to?(@triple).should eql true }
+		specify { (@negative_triple+@zero_triple).is_equal_to?(@negative_triple).should eql true }
+		specify { (@zero_triple+@zero_triple).is_equal_to?(@zero_triple).should eql true }
 
-		specify { @triple.add_to(@negative_triple).x.should eql 0.9 }
-		specify { @triple.add_to(@negative_triple).y.should eql 1.1 }
-		specify { @triple.add_to(@negative_triple).z.should eql -13.0 }
+		specify { (@triple+@negative_triple).x.should eql 0.9 }
+		specify { (@triple+@negative_triple).y.should eql 1.1 }
+		specify { (@triple+@negative_triple).z.should eql -13.0 }
 
-		specify { @negative_triple.add_to(@triple).x.should eql 0.9 }
-		specify { @negative_triple.add_to(@triple).y.should eql 1.1 }
-		specify { @negative_triple.add_to(@triple).z.should eql -13.0 }
+		specify { (@negative_triple+@triple).x.should eql 0.9 }
+		specify { (@negative_triple+@triple).y.should eql 1.1 }
+		specify { (@negative_triple+@triple).z.should eql -13.0 }
 	end
 
 	context "the times_constant method should multiply each value of a triple by a constant" do

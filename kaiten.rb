@@ -20,7 +20,7 @@ class Kaiten
 	private
 
 		def sum_phi_and_r_velocities(point)
-			return chakra_phi_velocity(point).add_to(chakra_r_velocity(point))
+			return chakra_phi_velocity(point)+chakra_r_velocity(point)
 		end
 
 		def chakra_phi_velocity(point)

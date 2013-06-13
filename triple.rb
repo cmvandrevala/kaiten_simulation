@@ -24,10 +24,10 @@ class Triple
 		end
 	end
 
-	def add_to(another_triple)
-		x_value = self.x + another_triple.x
-		y_value = self.y + another_triple.y
-		z_value = self.z + another_triple.z
+	def +(another_triple)
+		x_value = @x + another_triple.x
+		y_value = @y + another_triple.y
+		z_value = @z + another_triple.z
 		return Triple.new(x_value, y_value, z_value)
 	end
 

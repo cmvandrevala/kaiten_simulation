@@ -9,12 +9,12 @@ class Simulation
 	end
 
 	def evolve_velocity(acceleration)
-		@kunai.velocity = @kunai.velocity.add_to(acceleration.times_constant(@time_step))
+		@kunai.velocity = @kunai.velocity+acceleration.times_constant(@time_step)
 	end
 
 	def evolve_position(acceleration)
-		@kunai.position = @kunai.position.add_to(@kunai.velocity.times_constant(@time_step))
-		@kunai.position = @kunai.position.add_to(acceleration.times_constant(0.5*@time_step**2))
+		@kunai.position = @kunai.position+@kunai.velocity.times_constant(@time_step)
+		@kunai.position = @kunai.position+acceleration.times_constant(0.5*@time_step**2)
 	end
 
 	def acceleration(force)
