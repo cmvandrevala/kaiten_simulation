@@ -1,4 +1,4 @@
-task :default => [:run_tests]
+task :default => [:run_simulation]
 
 task :update_gems do
 	system("bundle update")
@@ -10,16 +10,7 @@ task :run_tests do
 end
 
 task :run_simulation do
-	#File.open("output.txt", 'a') {|f| f.write("#{@kunai.position.x}\t#{@kunai.position.y}\t#{@kunai.position.z}\n") }
-	#puts "#{@kunai.position.x}\t#{@kunai.position.y}\t#{@kunai.position.z}"
-	#1000.times do |f|
-	#	current_force = self.force(@kunai.position)
-	#	current_acceleration = self.acceleration(current_force)
-	#	self.evolve_position(current_acceleration)
-	#	self.evolve_velocity(current_acceleration)
-	#	puts "#{@kunai.position.x}\t#{@kunai.position.y}\t#{@kunai.position.z}"
-	#	File.open("output.txt", 'a') {|f| f.write("#{@kunai.position.x}\t#{@kunai.position.y}\t#{@kunai.position.z}\n") }
-	#end
+	ruby "run_simulation.rb"
 end
 
 task :clean do
