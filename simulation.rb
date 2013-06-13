@@ -9,23 +9,23 @@ class Simulation
 	end
 
 	def evolve_velocity(acceleration)
-		@kunai.velocity = @kunai.velocity+acceleration.times_constant(@time_step)
+		@kunai.velocity = @kunai.velocity+acceleration*@time_step
 	end
 
 	def evolve_position(acceleration)
-		@kunai.position = @kunai.position+@kunai.velocity.times_constant(@time_step)
-		@kunai.position = @kunai.position+acceleration.times_constant(0.5*@time_step**2)
+		@kunai.position = @kunai.position+@kunai.velocity*(@time_step)
+		@kunai.position = @kunai.position+acceleration*(0.5*@time_step**2)
 	end
 
 	def acceleration(force)
-		return force.times_constant(1/@kunai.mass)
+		return force*(1/@kunai.mass)
 	end
 
 	def force(position)
 		if position.magnitude > @kaiten.radius || position.magnitude == 0.0
 			return Triple.new(0, 0, 0)
 		else
-			return @kaiten.total_chakra_velocity(position).square.times_constant(self.force_coefficient)
+			return @kaiten.total_chakra_velocity(position).square*(self.force_coefficient)
 		end
 	end
 

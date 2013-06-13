@@ -42,7 +42,7 @@ describe Simulation do
 	context "when calculating the drag force on the kunai" do
 		specify { @simulation.drag_coefficient.should eql 0.47 }
 		specify { @simulation.force_coefficient.should eql 0.00287875 }
-		specify { @simulation.force(@within_kaiten).is_equal_to?(Triple.new(1, 81, 0).times_constant(@simulation.force_coefficient)).should eql true }
+		specify { @simulation.force(@within_kaiten).is_equal_to?(Triple.new(1, 81, 0)*@simulation.force_coefficient).should eql true }
 		specify { @simulation.force(@zero_vector).is_equal_to?(@zero_vector).should eql true }
 		specify { @simulation.force(@outside_kaiten).is_equal_to?(@zero_vector).should eql true }
 	end

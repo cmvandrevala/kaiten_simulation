@@ -77,7 +77,7 @@ describe Triple do
 		specify { @zero_triple.r_hat.magnitude.should eql 0.0 }
 	end
 
-	context "the add_to method should sum a pair of triples" do
+	context "the + method should sum a pair of triples" do
 		specify { (@triple+@zero_triple).is_equal_to?(@triple).should eql true }
 		specify { (@negative_triple+@zero_triple).is_equal_to?(@negative_triple).should eql true }
 		specify { (@zero_triple+@zero_triple).is_equal_to?(@zero_triple).should eql true }
@@ -91,16 +91,16 @@ describe Triple do
 		specify { (@negative_triple+@triple).z.should eql -13.0 }
 	end
 
-	context "the times_constant method should multiply each value of a triple by a constant" do
-		specify { @triple.times_constant(5).is_equal_to?(Triple.new(5.0, 10.0, -15.0)).should eql true }
-		specify { @triple.times_constant(-5).is_equal_to?(Triple.new(-5.0, -10.0, 15.0)).should eql true }
-		specify { @triple.times_constant(0).is_equal_to?(@zero_triple).should eql true }
+	context "the * method should multiply each value of a triple by a constant" do
+		specify { (@triple*5).is_equal_to?(Triple.new(5.0, 10.0, -15.0)).should eql true }
+		specify { (@triple*(-5)).is_equal_to?(Triple.new(-5.0, -10.0, 15.0)).should eql true }
+		specify { (@triple*0).is_equal_to?(@zero_triple).should eql true }
 
-		specify { @negative_triple.times_constant(1.0).is_equal_to?(Triple.new(-0.1, -0.9, -10.0)).should eql true }
-		specify { @negative_triple.times_constant(0.000).is_equal_to?(@zero_triple).should eql true }
+		specify { (@negative_triple*1.0).is_equal_to?(Triple.new(-0.1, -0.9, -10.0)).should eql true }
+		specify { (@negative_triple*0.000).is_equal_to?(@zero_triple).should eql true }
 
-		specify { @zero_triple.times_constant(6.0).is_equal_to?(@zero_triple).should eql true }
-		specify { @zero_triple.times_constant(0.0).is_equal_to?(@zero_triple).should eql true }
+		specify { (@zero_triple*6.0).is_equal_to?(@zero_triple).should eql true }
+		specify { (@zero_triple*0.0).is_equal_to?(@zero_triple).should eql true }
 	end
 
 	context "the is_equal_to? method should compare two triples" do

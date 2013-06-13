@@ -30,7 +30,7 @@ class Kaiten
 		end
 
 		def chakra_r_velocity(point)
-			return point.r_hat.times_constant(@outward_chakra_speed)
+			return point.r_hat*@outward_chakra_speed
 		end
 
 

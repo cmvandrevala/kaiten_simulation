@@ -31,11 +31,8 @@ class Triple
 		return Triple.new(x_value, y_value, z_value)
 	end
 
-	def times_constant(constant)
-		x_value = constant*self.x
-		y_value = constant*self.y
-		z_value = constant*self.z
-		return Triple.new(x_value, y_value, z_value)
+	def *(constant)
+		return Triple.new(constant*@x, constant*@y, constant*@z)
 	end
 
 	def is_equal_to?(another_triple)
