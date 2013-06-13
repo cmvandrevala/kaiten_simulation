@@ -1,4 +1,7 @@
 require_relative '../simulation.rb'
+require_relative '../kaiten.rb'
+require_relative '../kunai.rb'
+require_relative '../triple.rb'
 
 describe Simulation do
 	
@@ -42,9 +45,9 @@ describe Simulation do
 	context "when calculating the drag force on the kunai" do
 		specify { @simulation.drag_coefficient.should eql 0.47 }
 		specify { @simulation.force_coefficient.should eql 0.00287875 }
-		specify { @simulation.force(@within_kaiten).is_equal_to?(Triple.new(1, 81, 0)*@simulation.force_coefficient).should eql true }
-		specify { @simulation.force(@zero_vector).is_equal_to?(@zero_vector).should eql true }
-		specify { @simulation.force(@outside_kaiten).is_equal_to?(@zero_vector).should eql true }
+		specify { @simulation.force(@within_kaiten).should == Triple.new(1, 81, 0)*@simulation.force_coefficient }
+		specify { @simulation.force(@zero_vector).should == @zero_vector }
+		specify { @simulation.force(@outside_kaiten).should == @zero_vector }
 	end
 
 	context "when calculating the velocity in the next time step using @zero_vector" do
@@ -54,8 +57,8 @@ describe Simulation do
 		end
 		specify { @simulation.kunai.velocity.should be_an_instance_of Triple }
 		specify { @simulation.kunai.position.should be_an_instance_of Triple }
-		specify { @simulation.kunai.velocity.is_equal_to?(@simulation.kunai.velocity).should eql true }
-		specify { @simulation.kunai.position.is_equal_to?(@zero_time_stepped_position).should eql true }
+		specify { @simulation.kunai.velocity.should == @simulation.kunai.velocity }
+		specify { @simulation.kunai.position.should == @zero_time_stepped_position }
 	end
 
 	context "when calculating the velocity in the next time step using @acceleration" do
@@ -65,8 +68,8 @@ describe Simulation do
 		end
 		specify { @simulation.kunai.velocity.should be_an_instance_of Triple }
 		specify { @simulation.kunai.position.should be_an_instance_of Triple }
-		specify { @simulation.kunai.velocity.is_equal_to?(@time_stepped_velocity).should eql true }
-		specify { @simulation.kunai.position.is_equal_to?(@time_stepped_position).should eql true }
+		specify { @simulation.kunai.velocity.should == @time_stepped_velocity }
+		specify { @simulation.kunai.position.should == @time_stepped_position }
 	end
 
 	context "when calculating the parameters in the next time step using @x_acceleration" do
@@ -76,8 +79,8 @@ describe Simulation do
 		end
 		specify { @simulation.kunai.velocity.should be_an_instance_of Triple }
 		specify { @simulation.kunai.position.should be_an_instance_of Triple }
-		specify { @simulation.kunai.velocity.is_equal_to?(@x_time_stepped_velocity).should eql true }
-		specify { @simulation.kunai.position.is_equal_to?(@x_time_stepped_position).should eql true }
+		specify { @simulation.kunai.velocity.should == @x_time_stepped_velocity }
+		specify { @simulation.kunai.position.should == @x_time_stepped_position }
 	end
 
 	context "when calculating the parameters in the next time step using @y_acceleration" do
@@ -87,8 +90,8 @@ describe Simulation do
 		end
 		specify { @simulation.kunai.velocity.should be_an_instance_of Triple }
 		specify { @simulation.kunai.position.should be_an_instance_of Triple }
-		specify { @simulation.kunai.velocity.is_equal_to?(@y_time_stepped_velocity).should eql true }
-		specify { @simulation.kunai.position.is_equal_to?(@y_time_stepped_position).should eql true }
+		specify { @simulation.kunai.velocity.should == @y_time_stepped_velocity }
+		specify { @simulation.kunai.position.should == @y_time_stepped_position }
 	end
 
 	context "when calculating the parameters in the next time step using @z_acceleration" do
@@ -98,8 +101,8 @@ describe Simulation do
 		end
 		specify { @simulation.kunai.velocity.should be_an_instance_of Triple }
 		specify { @simulation.kunai.position.should be_an_instance_of Triple }
-		specify { @simulation.kunai.velocity.is_equal_to?(@z_time_stepped_velocity).should eql true }
-		specify { @simulation.kunai.position.is_equal_to?(@z_time_stepped_position).should eql true }
+		specify { @simulation.kunai.velocity.should == @z_time_stepped_velocity }
+		specify { @simulation.kunai.position.should == @z_time_stepped_position }
 	end
 
 	context "when calculating the acceleration given a force" do

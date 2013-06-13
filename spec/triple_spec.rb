@@ -78,50 +78,55 @@ describe Triple do
 	end
 
 	context "the + method should sum a pair of triples" do
-		specify { (@triple+@zero_triple).is_equal_to?(@triple).should eql true }
-		specify { (@negative_triple+@zero_triple).is_equal_to?(@negative_triple).should eql true }
-		specify { (@zero_triple+@zero_triple).is_equal_to?(@zero_triple).should eql true }
+		specify { (@triple + @zero_triple).should == @triple }
+		specify { (@negative_triple + @zero_triple).should == @negative_triple }
+		specify { (@zero_triple + @zero_triple).should == @zero_triple }
 
-		specify { (@triple+@negative_triple).x.should eql 0.9 }
-		specify { (@triple+@negative_triple).y.should eql 1.1 }
-		specify { (@triple+@negative_triple).z.should eql -13.0 }
+		specify { (@triple + @negative_triple).x.should eql 0.9 }
+		specify { (@triple + @negative_triple).y.should eql 1.1 }
+		specify { (@triple + @negative_triple).z.should eql -13.0 }
 
-		specify { (@negative_triple+@triple).x.should eql 0.9 }
-		specify { (@negative_triple+@triple).y.should eql 1.1 }
-		specify { (@negative_triple+@triple).z.should eql -13.0 }
+		specify { (@negative_triple + @triple).x.should eql 0.9 }
+		specify { (@negative_triple + @triple).y.should eql 1.1 }
+		specify { (@negative_triple + @triple).z.should eql -13.0 }
 	end
 
 	context "the * method should multiply each value of a triple by a constant" do
-		specify { (@triple*5).is_equal_to?(Triple.new(5.0, 10.0, -15.0)).should eql true }
-		specify { (@triple*(-5)).is_equal_to?(Triple.new(-5.0, -10.0, 15.0)).should eql true }
-		specify { (@triple*0).is_equal_to?(@zero_triple).should eql true }
+		specify { (@triple*5).should == Triple.new(5.0, 10.0, -15.0) }
+		specify { (@triple*-5).should == Triple.new(-5.0, -10.0, 15.0) }
+		specify { (@triple*0).should == @zero_triple }
 
-		specify { (@negative_triple*1.0).is_equal_to?(Triple.new(-0.1, -0.9, -10.0)).should eql true }
-		specify { (@negative_triple*0.000).is_equal_to?(@zero_triple).should eql true }
+		specify { (@negative_triple*1.0).should == Triple.new(-0.1, -0.9, -10.0) }
+		specify { (@negative_triple*0.000).should == @zero_triple }
 
-		specify { (@zero_triple*6.0).is_equal_to?(@zero_triple).should eql true }
-		specify { (@zero_triple*0.0).is_equal_to?(@zero_triple).should eql true }
+		specify { (@zero_triple*6.0).should == @zero_triple }
+		specify { (@zero_triple*0.0).should == @zero_triple }
 	end
 
-	context "the is_equal_to? method should compare two triples" do
+	context "the == method should compare two triples" do
+
 		before(:all) do
 			@duplicate_triple = Triple.new(1,2,-3)
 		end
-		specify { @triple.is_equal_to?(@triple).should eql true }
-		specify { @zero_triple.is_equal_to?(@zero_triple).should eql true }
-		specify { @negative_triple.is_equal_to?(@negative_triple).should eql true }
 
-		specify { @triple.is_equal_to?(Triple.new(1,2,-3)).should eql true }
-		specify { @triple.is_equal_to?(@duplicate_triple).should eql true }
+		specify { (@triple == @triple).should eql true }
+		specify { (@triple == @duplicate_triple).should eql true }
 
-		specify { @triple.is_equal_to?(@negative_triple).should eql false }
-		specify { @zero_triple.is_equal_to?(@triple).should eql false }
-		specify { @negative_triple.is_equal_to?(Triple.new(1,2,3)).should eql false }
+		specify { @triple.should == @triple }
+		specify { @zero_triple.should == @zero_triple }
+		specify { @negative_triple.should == @negative_triple }
+
+		specify { @triple.should == Triple.new(1,2,-3) }
+		specify { @triple.should == @duplicate_triple }
+
+		specify { @triple.should_not == @negative_triple }
+		specify { @zero_triple.should_not == @triple }
+		specify { @negative_triple.should_not == Triple.new(1,2,3) }
 	end
 
 	context "the method square should square each element of a triple" do
-		specify {@triple.square.is_equal_to?(Triple.new(1, 4, 9)).should eql true }
-		specify {@zero_triple.square.is_equal_to?(@zero_triple).should eql true }
+		specify { @triple.square.should == Triple.new(1, 4, 9) }
+		specify { @zero_triple.square.should == @zero_triple }
 	end
 
 end

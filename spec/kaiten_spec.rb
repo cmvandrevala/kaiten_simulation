@@ -1,4 +1,5 @@
 require_relative "../kaiten.rb"
+require_relative "../triple.rb"
 
 describe Kaiten do
 
@@ -43,14 +44,14 @@ describe Kaiten do
 	context "the method total_chakra_velocity should return the total chakra velocity at a point" do
 		specify { @kaiten.total_chakra_velocity(@center).should be_an_instance_of Triple }
 		specify { @kaiten.total_chakra_velocity(@center).magnitude.should eql 0.0 }
-		specify { @kaiten.total_chakra_velocity(@x_edge).is_equal_to?(@x_answer).should eql true }
-		specify { @kaiten.total_chakra_velocity(@y_edge).is_equal_to?(@y_answer).should eql true }
-		specify { @kaiten.total_chakra_velocity(@z_edge).is_equal_to?(@z_answer).should eql true }
+		specify { @kaiten.total_chakra_velocity(@x_edge).should == @x_answer }
+		specify { @kaiten.total_chakra_velocity(@y_edge).should == @y_answer }
+		specify { @kaiten.total_chakra_velocity(@z_edge).should == @z_answer }
 		specify { @kaiten.total_chakra_velocity(@barely_outside).magnitude.should eql 0.0 }
 		specify { @kaiten.total_chakra_velocity(@far_away_one_direction).magnitude.should eql 0.0 }
 		specify { @kaiten.total_chakra_velocity(@far_away_xyz).magnitude.should eql 0.0 }
-		specify { @kaiten.total_chakra_velocity(@edge_point).is_equal_to?(@edge_answer).should be true }
-		specify { @kaiten.total_chakra_velocity(@second_edge_point).is_equal_to?(@second_edge_answer).should be true }
+		specify { @kaiten.total_chakra_velocity(@edge_point).should == @edge_answer }
+		specify { @kaiten.total_chakra_velocity(@second_edge_point).should == @second_edge_answer }
 	end
 
 end

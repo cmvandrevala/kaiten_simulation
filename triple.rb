@@ -35,12 +35,12 @@ class Triple
 		return Triple.new(constant*@x, constant*@y, constant*@z)
 	end
 
-	def is_equal_to?(another_triple)
-		if self.x != another_triple.x
+	def ==(another_triple)
+		if @x != another_triple.x
 			return false
-		elsif self.y != another_triple.y
+		elsif @y != another_triple.y
 			return false
-		elsif self.z != another_triple.z
+		elsif @z != another_triple.z
 			return false
 		else
 			return true

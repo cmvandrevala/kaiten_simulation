@@ -1,4 +1,5 @@
 require_relative "../kunai.rb"
+require_relative "../triple.rb"
 
 describe Kunai do
 	
@@ -12,8 +13,8 @@ describe Kunai do
 		it { should be_an_instance_of Kunai }
 		specify { @kunai.area.should eql 0.01 }
 		specify { @kunai.mass.should eql 1.0 }
-		specify { @kunai.position.is_equal_to?(@default_position).should eql true }
-		specify { @kunai.velocity.is_equal_to?(@default_velocity).should eql true }
+		specify { @kunai.position.should == @default_position }
+		specify { @kunai.velocity.should == @default_velocity }
 	end
 
 end
