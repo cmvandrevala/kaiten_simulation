@@ -37,18 +37,4 @@ class Simulation
 		0.47 #Sphere
 	end
 
-	def run
-		#Untested code to run simulation
-		File.open("output.txt", 'a') {|f| f.write("#{@kunai.position.x}\t#{@kunai.position.y}\t#{@kunai.position.z}\n") }
-		puts "#{@kunai.position.x}\t#{@kunai.position.y}\t#{@kunai.position.z}"
-		1000.times do |f|
-			current_force = self.force(@kunai.position)
-			current_acceleration = self.acceleration(current_force)
-			self.evolve_position(current_acceleration)
-			self.evolve_velocity(current_acceleration)
-			puts "#{@kunai.position.x}\t#{@kunai.position.y}\t#{@kunai.position.z}"
-			File.open("output.txt", 'a') {|f| f.write("#{@kunai.position.x}\t#{@kunai.position.y}\t#{@kunai.position.z}\n") }
-		end
-	end
-
 end
