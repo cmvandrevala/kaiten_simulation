@@ -10,9 +10,9 @@ task :run_tests do
 end
 
 task :run_simulation do
-	ruby "run_simulation.rb"
+	ruby "lib/run_simulation.rb"
 end
 
 task :clean do
-	system("rm output.txt")
+	system("rm -f output.txt")
 end

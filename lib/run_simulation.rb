@@ -1,7 +1,7 @@
-require_relative "triple"
+require_relative "simulation"
 require_relative "kunai"
 require_relative "kaiten"
-require_relative "simulation"
+require_relative "triple"
 
 simulation = Simulation.new
 
