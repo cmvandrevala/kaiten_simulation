@@ -1,4 +1,4 @@
-require_relative '../triple.rb'
+require "triple"
 
 describe Triple do
 	

@@ -1,7 +1,7 @@
-require_relative '../simulation.rb'
-require_relative '../kaiten.rb'
-require_relative '../kunai.rb'
-require_relative '../triple.rb'
+require "simulation"
+require "kaiten"
+require "kunai"
+require "triple"
 
 describe Simulation do
 	

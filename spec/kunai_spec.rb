@@ -1,5 +1,5 @@
-require_relative "../kunai.rb"
-require_relative "../triple.rb"
+require "kunai"
+require "triple"
 
 describe Kunai do
 	

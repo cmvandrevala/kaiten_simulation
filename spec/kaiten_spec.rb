@@ -1,5 +1,5 @@
-require_relative "../kaiten.rb"
-require_relative "../triple.rb"
+require "kaiten"
+require "triple"
 
 describe Kaiten do
 
