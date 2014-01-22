@@ -15,31 +15,31 @@ describe Triple do
 	end
 
 	context "it should have coordinates (x,y,z)" do
-		specify { @triple.x.should eql 1.0 }
-		specify { @triple.y.should eql 2.0 }
-		specify { @triple.z.should eql -3.0 }
+		specify { @triple.x_position.should eql 1.0 }
+		specify { @triple.y_position.should eql 2.0 }
+		specify { @triple.z_position.should eql -3.0 }
 
-		specify { @zero_triple.x.should eql 0.0 }
-		specify { @zero_triple.y.should eql 0.0 }
-		specify { @zero_triple.z.should eql 0.0 }
+		specify { @zero_triple.x_position.should eql 0.0 }
+		specify { @zero_triple.y_position.should eql 0.0 }
+		specify { @zero_triple.z_position.should eql 0.0 }
 
-		specify { @negative_triple.x.should eql -0.1 }
-		specify { @negative_triple.y.should eql -0.9 }
-		specify { @negative_triple.z.should eql -10.0}
+		specify { @negative_triple.x_position.should eql -0.1 }
+		specify { @negative_triple.y_position.should eql -0.9 }
+		specify { @negative_triple.z_position.should eql -10.0}
 	end
 
 	context "the coordinates should be floating point values" do
-		specify { @triple.x.should be_an_instance_of Float }
-		specify { @triple.y.should be_an_instance_of Float }
-		specify { @triple.z.should be_an_instance_of Float }
+		specify { @triple.x_position.should be_an_instance_of Float }
+		specify { @triple.y_position.should be_an_instance_of Float }
+		specify { @triple.z_position.should be_an_instance_of Float }
 
-		specify { @zero_triple.x.should be_an_instance_of Float }
-		specify { @zero_triple.y.should be_an_instance_of Float }
-		specify { @zero_triple.z.should be_an_instance_of Float }
+		specify { @zero_triple.x_position.should be_an_instance_of Float }
+		specify { @zero_triple.y_position.should be_an_instance_of Float }
+		specify { @zero_triple.z_position.should be_an_instance_of Float }
 
-		specify { @negative_triple.x.should be_an_instance_of Float }
-		specify { @negative_triple.y.should be_an_instance_of Float }
-		specify { @negative_triple.z.should be_an_instance_of Float }
+		specify { @negative_triple.x_position.should be_an_instance_of Float }
+		specify { @negative_triple.y_position.should be_an_instance_of Float }
+		specify { @negative_triple.z_position.should be_an_instance_of Float }
 	end
 
 	context "the magnitude function should return the magnitude of the triple" do
@@ -55,17 +55,17 @@ describe Triple do
 	end
 
 	context "the r_hat function should calculate the r-hat components of the triple" do
-		specify { @triple.r_hat.x.should eql ( 1.0 / Math.sqrt(14) ) }
-		specify { @triple.r_hat.y.should eql ( 2.0 / Math.sqrt(14) ) }
-		specify { @triple.r_hat.z.should eql ( -3.0 / Math.sqrt(14) ) }
+		specify { @triple.r_hat.x_position.should eql ( 1.0 / Math.sqrt(14) ) }
+		specify { @triple.r_hat.y_position.should eql ( 2.0 / Math.sqrt(14) ) }
+		specify { @triple.r_hat.z_position.should eql ( -3.0 / Math.sqrt(14) ) }
 
-		specify { @zero_triple.r_hat.x.should eql 0.0 }
-		specify { @zero_triple.r_hat.y.should eql 0.0 }
-		specify { @zero_triple.r_hat.z.should eql 0.0 }
+		specify { @zero_triple.r_hat.x_position.should eql 0.0 }
+		specify { @zero_triple.r_hat.y_position.should eql 0.0 }
+		specify { @zero_triple.r_hat.z_position.should eql 0.0 }
 
-		specify { @negative_triple.r_hat.x.should eql ( -0.1 / Math.sqrt(100.82) ) }
-		specify { @negative_triple.r_hat.y.should eql ( -0.9 / Math.sqrt(100.82) ) }
-		specify { @negative_triple.r_hat.z.should eql ( -10.0 / Math.sqrt(100.82) ) }
+		specify { @negative_triple.r_hat.x_position.should eql ( -0.1 / Math.sqrt(100.82) ) }
+		specify { @negative_triple.r_hat.y_position.should eql ( -0.9 / Math.sqrt(100.82) ) }
+		specify { @negative_triple.r_hat.z_position.should eql ( -10.0 / Math.sqrt(100.82) ) }
 	end
 
 	context "the r_hat vector for a non-zero vector should have a magnitude of one" do
@@ -82,13 +82,13 @@ describe Triple do
 		specify { (@negative_triple + @zero_triple).should == @negative_triple }
 		specify { (@zero_triple + @zero_triple).should == @zero_triple }
 
-		specify { (@triple + @negative_triple).x.should eql 0.9 }
-		specify { (@triple + @negative_triple).y.should eql 1.1 }
-		specify { (@triple + @negative_triple).z.should eql -13.0 }
+		specify { (@triple + @negative_triple).x_position.should eql 0.9 }
+		specify { (@triple + @negative_triple).y_position.should eql 1.1 }
+		specify { (@triple + @negative_triple).z_position.should eql -13.0 }
 
-		specify { (@negative_triple + @triple).x.should eql 0.9 }
-		specify { (@negative_triple + @triple).y.should eql 1.1 }
-		specify { (@negative_triple + @triple).z.should eql -13.0 }
+		specify { (@negative_triple + @triple).x_position.should eql 0.9 }
+		specify { (@negative_triple + @triple).y_position.should eql 1.1 }
+		specify { (@negative_triple + @triple).z_position.should eql -13.0 }
 	end
 
 	context "the * method should multiply each value of a triple by a constant" do

@@ -13,8 +13,7 @@ class Simulation
 	end
 
 	def evolve_position(acceleration)
-		@kunai.position = @kunai.position+@kunai.velocity*(@time_step)
-		@kunai.position = @kunai.position+acceleration*(0.5*@time_step**2)
+		@kunai.position = @kunai.position+@kunai.velocity*(@time_step)+acceleration*(0.5*@time_step**2)
 	end
 
 	def acceleration(force)
@@ -22,11 +21,8 @@ class Simulation
 	end
 
 	def force(position)
-		if position.magnitude > @kaiten.radius || position.magnitude == 0.0
-			return Triple.new(0, 0, 0)
-		else
-			return @kaiten.total_chakra_velocity(position).square*(self.force_coefficient)
-		end
+		return Triple.new(0, 0, 0) if outside_kaiten_range(position)
+		return @kaiten.total_chakra_velocity(position).square*(self.force_coefficient)
 	end
 
 	def force_coefficient
@@ -35,6 +31,14 @@ class Simulation
 
 	def drag_coefficient
 		0.47 #Sphere
+	end
+
+	private
+
+	def outside_kaiten_range(position)
+		return true if position.magnitude > @kaiten.radius
+		return true if position.magnitude == 0.0
+		return false
 	end
 
 end

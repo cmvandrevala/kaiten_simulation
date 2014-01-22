@@ -24,8 +24,8 @@ class Kaiten
 		end
 
 		def chakra_phi_velocity(point)
-			x_velocity = -point.y*chakra_angular_speed
-			y_velocity = point.x*chakra_angular_speed
+			x_velocity = -point.y_position*chakra_angular_speed
+			y_velocity = point.x_position*chakra_angular_speed
 			return Triple.new(x_velocity, y_velocity, 0.0)
 		end
 
