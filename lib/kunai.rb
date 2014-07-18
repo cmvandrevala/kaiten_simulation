@@ -1,3 +1,5 @@
+require 'matrix'
+
 class Kunai
 
 	attr_reader :area, :mass
@@ -6,8 +8,8 @@ class Kunai
 	def initialize
 		@area = 0.01
 		@mass = 1.0
-		@position = Triple.new(20, 0, 0)
-		@velocity = Triple.new(-25, 0, 0)
+		@position = Vector[20, 0, 0]
+		@velocity = Vector[-25, 0, 0]
 	end
 
 end

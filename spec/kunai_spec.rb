@@ -1,12 +1,12 @@
 require "kunai"
-require "triple"
+require "vector"
 
 describe Kunai do
 	
 	before :each do
 		@kunai = Kunai.new
-		@default_position = Triple.new(20.0, 0.0, 0.0)
-		@default_velocity = Triple.new(-25.0, 0.0, 0.0)
+		@default_position = Vector[20.0, 0.0, 0.0]
+		@default_velocity = Vector[-25.0, 0.0, 0.0]
 	end
 
 	context "it should initialize properly" do

@@ -1,3 +1,5 @@
+require 'matrix'
+
 class Kaiten
 
 	attr_reader :radius, :air_density, :chakra_angular_speed, :outward_chakra_speed
@@ -11,7 +13,7 @@ class Kaiten
 
 	def total_chakra_velocity(point)
 		if (point.magnitude > radius)
-			return Triple.new(0.0, 0.0, 0.0) 
+			return Vector[0.0, 0.0, 0.0]
 		else
 			return sum_phi_and_r_velocities(point)
 		end
@@ -24,13 +26,13 @@ class Kaiten
 		end
 
 		def chakra_phi_velocity(point)
-			x_velocity = -point.y_position*chakra_angular_speed
-			y_velocity = point.x_position*chakra_angular_speed
-			return Triple.new(x_velocity, y_velocity, 0.0)
+			x_velocity = -point.y*chakra_angular_speed
+			y_velocity = point.x*chakra_angular_speed
+			return Vector[x_velocity, y_velocity, 0.0]
 		end
 
 		def chakra_r_velocity(point)
-			return point.r_hat*@outward_chakra_speed
+			return point.normalize*@outward_chakra_speed
 		end
 
 

@@ -21,16 +21,16 @@ class Simulation
 	end
 
 	def force(position)
-		return Triple.new(0, 0, 0) if outside_kaiten_range(position)
+		return Vector[0, 0, 0] if outside_kaiten_range(position)
 		return @kaiten.total_chakra_velocity(position).square*(self.force_coefficient)
 	end
 
 	def force_coefficient
-		0.5*@kaiten.air_density*@kunai.area*self.drag_coefficient
+		0.5*@kaiten.air_density*@kunai.area*self.drag_coefficient_of_sphere
 	end
 
-	def drag_coefficient
-		0.47 #Sphere
+	def drag_coefficient_of_sphere
+		0.47
 	end
 
 	private

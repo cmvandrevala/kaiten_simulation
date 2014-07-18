@@ -1,25 +1,25 @@
 require "kaiten"
-require "triple"
+require "vector"
 
 describe Kaiten do
 
 	before :all do
 		@kaiten = Kaiten.new(5)
 		@another_kaiten = Kaiten.new(5, 12, 13)
-		@center = Triple.new(0, 0, 0)
-		@x_edge = Triple.new(5, 0, 0)
-		@x_answer = Triple.new(1, 5, 0)
-		@y_edge = Triple.new(0, 5, 0)
-		@y_answer = Triple.new(-5, 1, 0)
-		@z_edge = Triple.new(0, 0, 5)
-		@z_answer = Triple.new(0, 0, 1)
-		@barely_outside = Triple.new(5.00001, 0.0, 0.0)
-		@far_away_one_direction = Triple.new(0, 1000, 0)
-		@far_away_xyz = Triple.new(100, 236, 129)
-		@edge_point = Triple.new(5/Math.sqrt(2), 5/Math.sqrt(2), 0)
-		@edge_answer = Triple.new(-4/Math.sqrt(2), 6/Math.sqrt(2), 0)
-		@second_edge_point = Triple.new( 1, 1, Math.sqrt(23) )
-		@second_edge_answer = Triple.new(-0.8, 1.2, Math.sqrt(23)/5)
+		@center = Vector[0, 0, 0]
+		@x_edge = Vector[5, 0, 0]
+		@x_answer = Vector[1, 5, 0]
+		@y_edge = Vector[0, 5, 0]
+		@y_answer = Vector[-5, 1, 0]
+		@z_edge = Vector[0, 0, 5]
+		@z_answer = Vector[0, 0, 1]
+		@barely_outside = Vector[5.00001, 0.0, 0.0]
+		@far_away_one_direction = Vector[0, 1000, 0]
+		@far_away_xyz = Vector[100, 236, 129]
+		@edge_point = Vector[5/Math.sqrt(2), 5/Math.sqrt(2), 0]
+		@edge_answer = Vector[-4/Math.sqrt(2), 6/Math.sqrt(2), 0]
+		@second_edge_point = Vector[1, 1, Math.sqrt(23) ]
+		@second_edge_answer = Vector[-0.8, 1.2, Math.sqrt(23)/5]
 	end
 
 	context "it should initialize a default instance of the class Kaiten" do
@@ -42,8 +42,6 @@ describe Kaiten do
 	end
 
 	context "the method total_chakra_velocity should return the total chakra velocity at a point" do
-		specify { @kaiten.total_chakra_velocity(@center).should be_an_instance_of Triple }
-		specify { @kaiten.total_chakra_velocity(@center).magnitude.should eql 0.0 }
 		specify { @kaiten.total_chakra_velocity(@x_edge).should == @x_answer }
 		specify { @kaiten.total_chakra_velocity(@y_edge).should == @y_answer }
 		specify { @kaiten.total_chakra_velocity(@z_edge).should == @z_answer }
