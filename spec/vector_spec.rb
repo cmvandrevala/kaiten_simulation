@@ -7,23 +7,27 @@ describe Vector do
 		@v = Vector[-0.1, -0.9, -10]
 	end
 
-	it "has an x-coordinate" do
-		expect(@v.x).to eq(-0.1)
-	end
+  context "accessing vector components" do
+
+  	it "has an x-coordinate" do
+  		expect(@v.x).to eq(-0.1)
+  	end
   
-	it "has an y-coordinate" do
-		expect(@v.y).to eq(-0.9)
-	end
+  	it "has an y-coordinate" do
+  		expect(@v.y).to eq(-0.9)
+  	end
   
-	it "has an z-coordinate" do
-		expect(@v.z).to eq(-10)
-	end
+  	it "has an z-coordinate" do
+  		expect(@v.z).to eq(-10)
+  	end
+  
+  end
   
   context "squaring the vector" do
     
     it "squares the x-component" do
-      expect(@v.square.x > 0.009).to be true
-      expect(@v.square.x < 0.011).to be true
+      expect(@v.square.x > 0.009999).to be true
+      expect(@v.square.x < 0.010001).to be true
     end
     
     it "squares the y-component" do    
