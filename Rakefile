@@ -9,7 +9,7 @@ task :test do
 	system("bundle exec rspec spec")
 end
 
-task :run => [:test] do
+task :run do
 	ruby "lib/run_simulation.rb"
 end
 
