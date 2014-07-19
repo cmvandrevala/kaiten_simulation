@@ -9,12 +9,24 @@ describe Kunai do
 		@default_velocity = Vector[-25.0, 0.0, 0.0]
 	end
 
-	context "it should initialize properly" do
-		it { should be_an_instance_of Kunai }
-		specify { @kunai.area.should eql 0.01 }
-		specify { @kunai.mass.should eql 1.0 }
-		specify { @kunai.position.should == @default_position }
-		specify { @kunai.velocity.should == @default_velocity }
+	context "initialization" do
+    
+    it "has a default area" do
+		  expect(@kunai.area).to eql 0.01
+    end
+    
+    it "has a default mass" do
+      expect(@kunai.mass).to eql 1.0
+    end
+    
+    it "has a default position" do
+      expect(@kunai.position).to eq Vector[20, 0, 0]
+    end
+    
+    it "has a default velocity" do
+      expect(@kunai.velocity).to eq Vector[-25, 0, 0]
+    end
+    
 	end
 
 end
