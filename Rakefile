@@ -1,15 +1,15 @@
 task :default => [:run_simulation]
 
-task :update_gems do
+task :sync do
 	system("bundle update")
 	system("bundle install")
 end
 
-task :run_tests do
+task :test do
 	system("bundle exec rspec spec")
 end
 
-task :run_simulation do
+task :run => [:test] do
 	ruby "lib/run_simulation.rb"
 end
 
